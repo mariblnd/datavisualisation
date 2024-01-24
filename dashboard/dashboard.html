@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader">
+        <img src="../img/Logo-EAU.svg" alt="">
+        <div id="loadingText"></div>
+    </div>
+
+    <header>
+        <h1>Relation entre le taux de nitrate et le nombre d'exploitations par département</h1>
+    </header>
+
+    <div class="principal">
+
+    <article class="container">
+
+
+            <div class="slider-container">
+                <p>Graph sur le taux de nitrates selon les départements</p>
+                <input type="range" min="0" max="1" step="0" id="sectionSlider" onchange="toggleSection()">
+                <p>Graph sur le nombre d'exploitations agricoles en fonction des départements</p>
+            </div>
+            
+            <section class="chart-quality">
+                
+                <canvas id="waterQualityChart" width="500" height="500"></canvas>
+
+                <div class="interaction nitrate-interaction">
+                    <div class="croissant">
+                        <input type="checkbox" id="sortByNitrate">
+                        <label for="sortByNitrate">Par ordre croissant</label>
+                    </div>
+    
+                    <div class="exploitation-ajout">
+                        <input type="checkbox" id="includeExploitationData">
+                        <label for="includeExploitationData">Inclure les données d'exploitation</label>
+                     </div>
+                     
+    
+                    <button class="goToConformity" onclick="showChartPopup()"><img src="../img/plus.svg" alt=""></button>
+                </div>
+
+            </section>
+            
+            <section class="exploitation">
+                
+                <canvas id="numberOfExploitation" width="500" height="500"></canvas>
+
+                <div class="interaction exploitation-interaction">
+                    <div class="croissant">
+                        <input type="checkbox" id="sortByExploitation">
+                        <label for="sortByNitrate">Par ordre croissant</label>
+                    </div>
+                </div>
+            </section>
+
+
+        
+                <section class="conformity">
+                    <div id="chartPopup" class="popup">
+                        <div class="conformity-illustration">
+                            <h2>Proportion de sources conforment à la règlementation</h2>
+                                <div class="chart">
+                                    <canvas id="camembertChart" width="200" height="200"></canvas>
+                                </div>
+                        </div>
+
+                        <div class="conformity-text">
+                            <p class="rappel">Rappel : La législation française interdit la consommation d'eau potable ayant un taux de nitrate supérieur à 50 mg/L.</p>
+                            <p>Alors que dit le graphique ?</p>
+                            <ul>
+                                <li>Total sources : 5000</li>
+                                <li>Pourcentage de sources conformes : 62,32%</li>
+                                <li>Pourcentage de sources non-conformes : 37,68</li>
+                            </ul>
+                            <button id="fermer" onclick="hideChartPopup()">Fermer</button>
+                        </div>
+                    </div>
+
+                </section>
+
+ 
+            
+    </article>  
+
+    <article class="text">
+        <div class="header-text">
+            <h2 class="title">Remarques</h2>
+            <img src="../img/Logo-EAU.svg" alt="">
+        </div>
+
+        <div class="blabla">
+
+        <p>Depuis 1950, on remarque une montée des taux de nitrate dans les sources d'eau potable française. La première raison évoquée : l'agriculture intensive. Alors, on a voulu vérifier si c'était toujours d'actualité.</p>
+        <br>Pour ce faire, nous avons utilisé les données de :
+        <ul>
+            <li>Hub'eau : pour relever les taux de nitrate de différents départements</li>
+            <li>Agreste : pour relever le nombre d'exploitation agricole en fonction des départements</li>
+        </ul>
+        <br>
+        <p>Puce à l'oreille : quand on voit le graph sur le taux de nitrate par ordre croissant et le nombre d'exploitation en fonction des départements, les points verts et bleus ne sont pas proche. Pourtant si les deux série statistiques étaient liées, ils auraient dû.</p>
+        <p class="conclusion">Le constat : Avec les indicateurs qu'on a, le coefficient de corrélation est proche de 0,22. Ainsi, il n'y a pas de corrélation entre la moyenne du taux de nitrate d'un département et la quantité d'exploitations agricoles sur son territoires</p>
+    
+     </div>
+
+    </article>
+
+    </div>
+
+    <article class = "chiffres">
+
+        <div class="card-container">
+            <div class="card">
+                <div class="side side--front">
+                    <p>La moyenne du taux de nitrate relevée dans les sources française</p>
+                </div>
+                <div class="side side--back">
+                    <p class="moyenne"></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="side side--front">
+                    <p>Moyenne d'exploitations agricoles par département</p>
+                </div>
+                <div class="side side--back moyenne--exploitation">
+                    <p class="moyenne-département"></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="side side--front">
+                    <p>L'écart-type des taux de nitrate</p>
+                </div>
+                <div class="side side--back">
+                    <p class="ecart"></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="side side--front">
+                    <p>Covariance</p>
+                </div>
+                <div class="side side--back moyenne--exploitation">
+                    <p class="covariance"></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="side side--front">
+                    <p>Coefficient de corrélation</p>
+                </div>
+                <div class="side side--back">
+                    <p class="correlation"></p>
+                </div>
+            </div>
+            
+        </div>
+
+        
+
+    </article>
+
+    <script src="script.js"></script>
+
+    <script>
+
+function showChartPopup() {
+  const popup = document.getElementById('chartPopup');
+  popup.classList.add('active');
+}
+
+function hideChartPopup() {
+  const popup = document.getElementById('chartPopup');
+  popup.classList.remove('active');
+}
+
+function toggleSection() {
+    const sectionSlider = document.getElementById('sectionSlider');
+    const chartQualitySection = document.querySelector('.chart-quality');
+    const exploitationSection = document.querySelector('.exploitation');
+    const titleH2 = document.querySelector('.title');
+
+    
+
+    if (sectionSlider.value == 0) {
+        chartQualitySection.style.display = 'block';
+        exploitationSection.style.display = 'none';
+        titleH2.style.color = '#86B6F6';
+    } 
+    else if (sectionSlider.value == 1) {
+        chartQualitySection.style.display = 'none';
+        exploitationSection.style.display = 'block';
+       
+        if (titleH2.style.color !== '#739072') {
+            titleH2.style.color = '#739072';
+        }
+
+    }
+}
+
+
+
+
+
+    </script>
+ 
+</body>
+</html>

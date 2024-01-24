@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "Coolvetica Courant";
+  src: url("font/coolvetica\ rg.otf");
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Coolvetica Courant";
+}
+
+div {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+h1 {
+  margin: 0;
+  font-size: 6em;
+  color:white;
+}
+
+a {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 10px 60px;
+  border: 2px solid white;
+  text-decoration: none;
+  font-size: 2em;
+  color: white;
+  position: relative;
+  background-color: #2D3250;
+  z-index: 2; }
+
+a:hover {
+  color: #2D3250;
+}
+
+a::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+  transform: scaleX(0);
+}
+
+a:hover::before {
+  transform: scaleX(1);
+  z-index: -2; 
+}
+
+canvas {
+  position: relative;
+  display: block;
+}

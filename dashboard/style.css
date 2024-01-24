@@ -1,0 +1,423 @@
+@font-face {
+  font-family: "Coolvetica Courant";
+  src: url("../font/coolvetica\ rg.otf");
+}
+
+body {
+  font-family: "Coolvetica Courant";
+  overflow: hidden;
+  margin: 0; 
+  padding: 0;
+  color: white;
+  background: #2D3250;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../img/Vague.svg");
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center;
+  z-index: -1;
+}
+
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  transform: translateY(0);
+}
+
+#loadingText {
+  height: 100vh;
+  width: 60vw;
+  color: #2D3250;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: textAnimation 3s infinite alternate;
+}
+
+#loader img {
+  position:absolute;
+  width:20%;
+  height:20%;
+  top:0;
+  right:0;
+  animation: textAnimation 3s infinite alternate;
+}
+
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+@keyframes textAnimation {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+header{
+padding: 1%;
+}
+
+header h1 {
+  color:white;
+  font-size: 2em;
+}
+
+p,li {
+  font-size: 14px;
+}
+
+
+.principal {
+  display: flex;
+  align-items: center;
+  height:65vh;
+}
+
+.container {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: #86B6F6 solid 2px;
+  border-radius: 10px;
+  margin:0 2%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: #2D3250;
+}
+
+.container section {
+  margin:0 auto;
+}
+
+.text {
+  position: relative;
+  width: 35%;
+  background-color: white;
+  border-radius: 10px;
+  margin: 5% ;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.header-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height:10%;
+  width: 100%;
+}
+
+.header-text h2 {
+  color:#86B6F6;
+  margin-left: 5%;
+  font-size:2em;
+}
+
+.header-text img {
+  width:20%;
+  height:100%;
+}
+
+.text {
+  height:100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conclusion {
+  padding:10px;
+  border-radius: 10px;
+  background-color: #86B6F6;
+}
+
+.text .blabla {
+  color:#2D3250;
+  margin: 0 5% ;
+}
+
+
+.chart-quality {
+  width: 65%;
+  height:45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:0 2%;
+  margin:0;
+}
+
+.exploitation {
+  width: 65%;
+  height:45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:2%;
+}
+
+
+div.interaction {
+  height:5vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 10px;
+  margin-top: 2%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.nitrate-interaction{
+background-color: #86B6F6;
+}
+
+.exploitation-interaction{
+  background-color:#739072 ;
+}
+
+.goToConformity {
+  width: 15%;
+  height: 70%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white; 
+  border: none; 
+  font-size: 1.25em; 
+  cursor: pointer; 
+  border-radius: 10px;
+  transition: background-color 0.3s ease; 
+}
+
+.goToConformity:hover {
+  background-color: #86B6F6;
+}
+
+
+
+div.interaction img {
+  width: 50%; 
+  height: 50%;
+}
+
+
+
+.popup {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+
+  width: 70%;
+  height: 70%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  background-color: white;
+  color:#2D3250;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 2%;
+
+  z-index: 1000;
+  opacity: 0; 
+}
+
+.popup.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+
+.conformity-illustration {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.conformity-illustration h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 5%;
+}
+
+.conformity-text {
+  width:50%;
+  font-size: 1.25em;
+  padding:0 2%;
+}
+
+.conformity-text p, .conformity-text li {
+  font-size: 1.25em;
+}
+
+.rappel{
+  color:#86B6F6;
+  background: #2D3250;
+  padding: 2%;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 1.05em;
+}
+
+.conformity-text button {
+  width: 30%;
+  height: 70%;
+  padding: 2%;
+  margin-top:10%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #86B6F6; 
+  color: white;
+  border: none; 
+  font-family: "Coolvetica Courant";
+  font-size: 1.25em; 
+  cursor: pointer; 
+  border-radius: 10px;
+  transition: background-color 0.3s ease; 
+}
+
+.conformity-text button:hover{
+  background-color: #2D3250;
+}
+
+.chart {
+  width: 50%;
+  height: 50%;
+}
+
+.conformity-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center ;
+  align-items: center;
+}
+
+
+
+.slider-container {
+  margin: 3%;
+  width:10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.slider-container p {
+  text-align: center;
+}
+
+.slider-container input {
+  width: 10%; 
+  height: 200px; 
+  writing-mode: bt-lr; 
+  appearance: slider-vertical;
+  transform: rotate(180deg);
+  margin: 2% 0; 
+  background-color: white;
+}
+
+
+
+.exploitation {
+  display: none;
+}
+
+.chiffres {
+  height:10vh;
+}
+
+.card-container {
+  height: 8vh;
+  margin: 2% 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: start;
+}
+
+.card {
+  width: 10%;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: transform 500ms ease-in-out;
+  transform-style: preserve-3d;
+  display: flex;
+  margin: 0 2.5%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card p {
+  font-size:14px;
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+}
+
+.side {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:5%;
+}
+
+.side--front {
+  background-color: white;
+  color:#2D3250;
+  z-index: 1;
+}
+
+.side--front p {
+  text-align: center;
+}
+
+.side--back {
+  background-color:#86B6F6 ;
+  transform: rotateY(180deg);
+}
+
+.moyenne--exploitation {
+  background-color: #739072;
+}
+

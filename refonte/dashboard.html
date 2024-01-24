@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datavisualisation</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../img/no3.svg">
+</head>
+<body>
+
+    <div id="loader">
+        <img src="../img/Logo-EAU.svg" alt="">
+        <div id="loadingText"></div>
+    </div>
+
+    <header>
+        <h1>Relation entre le taux de nitrate et le nombre d'exploitations par département</h1>
+
+        <nav>
+            <ul>
+                <li class="btn-info-nitrate">Le nitrate<img src="../img/no3.svg" alt=""></li>
+                <li class="btn-chiffres-nitrate">Les chiffres<img src="../img/maths.svg" alt=""></li>
+                <li class="btn-resultat">Le résultat<img src="../img/light.svg" alt=""></li>
+            </ul>
+        </nav>
+    </header>
+
+    <article class="container">
+
+        <section class="chart-quality">
+            <canvas id="waterQualityChart" width="500" height="500"></canvas>
+
+            <div class="interaction nitrate-interaction">
+
+                <div class="slider-container">
+                    <h3>Choix des graphismes</h3>
+                    <li id="btn-nitrate-chart" class="selected">Taux de nitrate</li>
+                    <li id="btn-exploitation-chart">Exploitations agricoles</li>
+                </div>
+
+                <div class="checkbox">
+                    <h3>Voir...</h3>
+                    <div class="croissant">
+                        <input type="checkbox" id="sortByNitrate">
+                        <label for="sortByNitrate">Par ordre croissant</label>
+                    </div>
+
+                    <div class="exploitation-ajout">
+                        <input type="checkbox" id="includeExploitationData">
+                        <label for="includeExploitationData">Inclure les données d'exploitations</label>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="exploitation">
+            <canvas id="numberOfExploitation" width="500" height="500"></canvas>
+
+            <div class="interaction exploitation-interaction">
+                <div class="slider-container">
+                    <h3>Choix des graphismes</h3>
+                    <li id="btn-nitrate-exploitation">Taux de nitrate</li>
+                    <li id="btn-exploitation-exploitation" class="selected">Exploitations agricoles</li>
+                </div>
+                <div class="checkbox">
+                    <div class="croissant">
+                        <h3>Voir...</h3>
+                        <input type="checkbox" id="sortByExploitation">
+                        <label for="sortByExploitation">Par ordre croissant</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
+    </article> 
+    
+    <div id="chartPopup1" class="popup leNitrate"> 
+        <div class="header-pop-up">
+            <h3>Le nitrate</h3>
+            <button><svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 449.998 449.998" xml:space="preserve" fill="#2D3250" stroke="#2D3250"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon style="fill:#010002;" points="449.974,34.855 415.191,0 225.007,190.184 34.839,0 0.024,34.839 190.192,224.999 0.024,415.159 34.839,449.998 225.007,259.797 415.191,449.998 449.974,415.143 259.83,224.999 "></polygon> </g> </g> </g></svg></button> 
+        </div>
+
+        <div class="wrapper1">
+            <div class="box1 header">
+                <h4>Définition</h4>
+                <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 533.725 533.725" xml:space="preserve" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M476.472,266.407c31.575,0,57.253-25.684,57.253-57.265c0-31.575-25.678-57.265-57.253-57.265 c-31.574,0-57.264,25.69-57.264,57.265c0,10.667,2.988,20.627,8.08,29.193l-98.812,72.024 c-15.251-16.604-36.666-27.324-60.646-28.562l-6.159-99.991c33.034-6.667,57.977-35.896,57.977-70.857 c0.023-39.842-32.416-72.27-72.275-72.27c-39.854,0-72.305,32.427-72.305,72.281c0,38.003,29.496,69.175,66.781,71.995 l6.16,100.032c-27.914,4.904-51.31,22.852-63.711,47.363l-58.59-21.639c0.654-3.619,1.051-7.321,1.051-11.128 c0-34.944-28.434-63.366-63.389-63.366C28.445,234.219,0,262.641,0,297.585c0,34.95,28.434,63.384,63.372,63.384 c24.154,0,45.155-13.569,55.857-33.49l58.193,21.51c-1.676,6.795-2.668,13.825-2.668,21.123c0,48.846,39.737,88.582,88.571,88.582 c33.46,0,62.63-18.671,77.693-46.112l62.263,25.386c-0.514,2.826-0.888,5.711-0.888,8.676c0,26.684,21.708,48.402,48.425,48.402 c26.682,0,48.39-21.719,48.39-48.402c0-26.693-21.708-48.4-48.39-48.4c-16.687,0-31.399,8.453-40.111,21.322l-62.238-25.41 c2.172-7.66,3.398-15.693,3.398-24.043c0-15.916-4.286-30.816-11.654-43.754l100.037-72.923 C450.128,261.543,462.74,266.407,476.472,266.407z M63.383,341.117c-23.973,0-43.497-19.523-43.497-43.532 c0-23.979,19.524-43.503,43.497-43.503c24.002,0,43.526,19.512,43.526,43.503C106.91,321.594,87.385,341.117,63.383,341.117z M450.83,418.116c15.74,0,28.539,12.786,28.539,28.538c0,15.741-12.799,28.551-28.539,28.551c-15.764,0-28.562-12.81-28.562-28.551 C422.267,430.902,435.066,418.116,450.83,418.116z M194.926,110.961c0-28.913,23.535-52.43,52.448-52.43 c28.901,0,52.424,23.518,52.424,52.43c0,28.901-23.523,52.424-52.424,52.424C218.461,163.397,194.926,139.874,194.926,110.961z M476.472,171.752c20.622,0,37.391,16.78,37.391,37.39c0,20.627-16.769,37.39-37.391,37.39c-20.633,0-37.39-16.763-37.39-37.39 C439.059,188.533,455.839,171.752,476.472,171.752z"></path> </g> </g></svg>
+                <p>Le nitrate, d'un point de vue chimique, est l'ion NO₃⁻, constitué d'un atome d'azote (N) entouré de trois atomes d'oxygène (O). Les nitrates sont des composés chimiques contenant cet ion.</p>
+            </div>
+            
+            <div class="box1 content">
+                <h4>Dans l'eau</h4>
+                <p>La présence de nitrate dans l'eau potable est souvent liée à des activités agricoles. Les nitrates proviennent principalement de l'utilisation d'engrais azotés dans l'agriculture. Lorsque les engrais sont appliqués sur les cultures, une partie peut être lessivée par les pluies ou les arrosages, entraînant le lessivage des nitrates dans le sol.</p> 
+                <br>
+                <div class="legislation">
+                    <h5><span>50</span>mg/L</h5>
+                    <p>C'est le taux à ne pas dépasser, d'après la directive européenne 91/676/CEE.</p> 
+                </div>        
+             </div>
+
+             <div class="box1 sidebar">
+                <canvas id="camembertChart" width="100" height="100"></canvas>
+            </div>
+
+          </div>
+
+     
+    </div>
+
+    <div id="chartPopup2" class="popup lesChiffres">
+        <div class="header-pop-up">
+            <h3>Les chiffres</h3>
+            <button><svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 449.998 449.998" xml:space="preserve" fill="#2D3250" stroke="#2D3250"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon style="fill:#010002;" points="449.974,34.855 415.191,0 225.007,190.184 34.839,0 0.024,34.839 190.192,224.999 0.024,415.159 34.839,449.998 225.007,259.797 415.191,449.998 449.974,415.143 259.83,224.999 "></polygon> </g> </g> </g></svg></button> 
+        </div>
+        <div class="wrapper2">
+            <div class="box a">
+                <h4>Covariance</h4>
+                <p class="covariance"></p>
+                <p class="rappel">Rappel : La covariance mesure comment deux ensembles de données varient ensemble.</p>
+            </div>
+
+            <div class="box b">
+                <h4>Coéfficient de correlation</h4>
+                <p class="correlation"></p>
+                <p class="rappel">Rappel : Le taux de corrélation est un indicateur statistique qui résume la relation linéaire entre deux ensembles de données.</p>
+                <p class="commentaire">C'est un coéfficient relativement bas.</p>
+            </div>
+
+            <div class="box c">
+                <h5>Moyenne des taux de nitrate</h5>
+                <span class="moyenne"></span>
+                <p>mg/L</p> 
+                <br>
+                <p class="commentaire">C'est un taux correct.</p>
+            </div>
+
+            <div class="box d">
+                <h5>Moyenne du nombre d'exploitations agricoles</h5>
+                <span class="moyenne-département"></span>
+                <p>exploitations</p>
+                <br>
+                <p class="commentaire">La France est le 5e exportateur mondial de produits agricoles.</p>
+            </div>
+        </div> 
+    </div>
+
+    <div id="chartPopup3" class="popup leResultat">  
+        <div class="header-pop-up">
+            <h3>Le résultat</h3>
+            <button><svg height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 449.998 449.998" xml:space="preserve" fill="#2D3250" stroke="#2D3250"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <polygon style="fill:#010002;" points="449.974,34.855 415.191,0 225.007,190.184 34.839,0 0.024,34.839 190.192,224.999 0.024,415.159 34.839,449.998 225.007,259.797 415.191,449.998 449.974,415.143 259.83,224.999 "></polygon> </g> </g> </g></svg></button> 
+        </div>
+
+        <div class="conclusion">
+
+            <div class="infographie">
+                <a href="../img/infographie.svg" download>
+                    <img src="../img/infographie.svg" alt=""> 
+                </a>
+                
+            </div>
+                
+                
+            <div class="conclusion-text">
+                <div class="ccl-1">
+                   <span>1</span> 
+                   <p>Puce à l'oreille : En examinant attentivement le graphique illustrant les données sur le taux de nitrate et le nombre d'exploitations agricoles, on remarque que les cercles bleus et verts sont généralement bien éloignés. Lorsque les données sont ordonnées de manière croissante, il n'est pas évident d'identifier deux courbes suivant la même tendance.</p>
+                </div>
+
+                <div class="ccl-1">  
+                   <span>2</span>
+                   <p>Constatation : Le taux de corrélation étant faible entre les deux jeux de données, cela suggère que les deux jeux de données ne sont pas corrélés.</p>
+                </div>
+
+                <div class="ccl-1">
+                   <span>3</span>
+                   <p>Pourquoi cela ? : Ce qui influence réellement le taux de nitrate, c'est le type des exploitations agricoles. La présence de 1000 fermes bio ne fera pas le même effet que 10 énormes élevages porcins. La prochaine fois, il faudrait mettre en relation les données de nitrate par département et le nombre d'exploitations d'agriculture intensive présentes sur le territoire.</p>
+                </div>
+                
+                <div class="ccl-2">
+                    <a href="../img/infographie.pdf" download>Téléchargez l'infographie</a>
+                </div>
+
+                
+        </div>
+
+        
+
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function showChartPopup() {
+    const btnNitrateInfo = document.querySelector('.btn-info-nitrate');
+    const btnChiffres = document.querySelector('.btn-chiffres-nitrate');
+    const btnResultat = document.querySelector('.btn-resultat');
+
+    const popup1 = document.getElementById('chartPopup1');
+    const popup2 = document.getElementById('chartPopup2');
+    const popup3 = document.getElementById('chartPopup3');
+
+    function showPopup(popup, button) {
+        popup1.style.display = 'none';
+        popup2.style.display = 'none';
+        popup3.style.display = 'none';
+        popup.style.display = 'block';
+
+        const blurElement = document.createElement('div');
+        blurElement.classList.add('blur-background');
+        document.body.appendChild(blurElement);
+
+        blurElement.style.filter = 'blur(5px)';
+        blurElement.style.pointerEvents = 'none';
+
+        const closeButton = popup.querySelector('button');
+        closeButton.addEventListener('click', function () {
+            popup.style.display = 'none';
+            blurElement.remove();
+
+            button.classList.remove('selected'); 
+        });
+        
+  
+        button.classList.add('selected'); 
+    }
+
+    btnNitrateInfo.addEventListener('click', function () {
+        showPopup(popup1, btnNitrateInfo);
+    });
+
+    btnChiffres.addEventListener('click', function () {
+        showPopup(popup2, btnChiffres);
+    });
+
+    btnResultat.addEventListener('click', function () {
+        showPopup(popup3, btnResultat);
+    });
+}
+
+showChartPopup();
+
+
+let isChartQualityVisible = true;
+
+const btnNitrateChart = document.getElementById("btn-nitrate-chart");
+const btnExploitationChart = document.getElementById("btn-exploitation-chart");
+const btnNitrateExploitation = document.getElementById("btn-nitrate-exploitation");
+const btnExploitationExploitation = document.getElementById("btn-exploitation-exploitation");
+const chartQualitySection = document.querySelector('.chart-quality');
+const exploitationSection = document.querySelector('.exploitation');
+
+btnNitrateChart.addEventListener('click', function () {
+    if (!isChartQualityVisible) {
+        chartQualitySection.style.display = 'flex';
+        exploitationSection.style.display = 'none';
+        isChartQualityVisible = true;
+    }
+});
+
+btnExploitationChart.addEventListener('click', function () {
+    if (isChartQualityVisible) {
+        chartQualitySection.style.display = 'none';
+        exploitationSection.style.display = 'flex';
+        isChartQualityVisible = false;
+    }
+});
+
+btnNitrateExploitation.addEventListener('click', function () {
+    if (!isChartQualityVisible) {
+        chartQualitySection.style.display = 'flex';
+        exploitationSection.style.display = 'none';
+        isChartQualityVisible = true;
+    }
+});
+
+btnExploitationExploitation.addEventListener('click', function () {
+    if (isChartQualityVisible) {
+        chartQualitySection.style.display = 'none';
+        exploitationSection.style.display = 'flex';
+        isChartQualityVisible = false;
+    }
+});
+
+});
+  
+  
+</script>
+
+
+
+ 
+</body>
+</html>
